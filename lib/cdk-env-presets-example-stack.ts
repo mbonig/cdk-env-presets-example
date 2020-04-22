@@ -4,7 +4,7 @@ import {Instance, InstanceClass, InstanceSize, InstanceType, MachineImage, Vpc} 
 
 
 export interface CdkEnvPresetsExampleStackProps extends StackProps {
-    envPresets: { instanceType: string };
+    envPresets: { instanceClass: string };
 }
 
 export class CdkEnvPresetsExampleStack extends cdk.Stack {
@@ -12,14 +12,14 @@ export class CdkEnvPresetsExampleStack extends cdk.Stack {
         super(scope, id, props);
 
         new Instance(this, 'some-instance', {
-            instanceType: InstanceType.of(props.envPresets.instanceType as InstanceClass, InstanceSize.MEDIUM),
+            instanceType: InstanceType.of(props.envPresets.instanceClass as InstanceClass, InstanceSize.MEDIUM),
             machineImage: MachineImage.latestAmazonLinux(),
             vpc: new Vpc(this, 'vpc')
 
         });
         // The code that defines your stack goes here
         new CfnOutput(this, 'some-usage-of-env-presets', {
-            value: props?.envPresets.instanceType
+            value: props?.envPresets.instanceClass
         })
     }
 }
