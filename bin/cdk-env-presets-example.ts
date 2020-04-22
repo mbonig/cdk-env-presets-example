@@ -11,7 +11,7 @@ if (!env_presets){
     process.exit();
 }
 
-const envPresets = require(`./environments/${env_presets}.json`);
+const envPresets = require(`./environments/${env_presets}`);
 
 new CdkEnvPresetsExampleStack(app, 'CdkEnvPresetsExampleStack', {
     envPresets
